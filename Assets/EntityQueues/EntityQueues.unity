@@ -179,12 +179,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419046200}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 1239367053}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &465880681
 GameObject:
@@ -501,6 +501,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1224212560}
+  - {fileID: 419046203}
+  - {fileID: 1482035122}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -700,8 +702,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1487863750}
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 1239367053}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1085,6 +1087,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727207375}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2120719369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7364905575996686745, guid: b87d2ec623a13d9498b8e360146f9c4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7364905575155987373}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2120719371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120719369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c27fb0d4b94f64a974cec2294de85c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  queue: {fileID: 7364905575155987374}
 --- !u!1001 &7364905575155987373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1096,6 +1117,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Queue
+      objectReference: {fileID: 0}
+    - target: {fileID: 7364905575996686745, guid: b87d2ec623a13d9498b8e360146f9c4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7364905575996686744, guid: b87d2ec623a13d9498b8e360146f9c4e,
         type: 3}
@@ -1160,7 +1186,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 7364905575155987373}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2120719369}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 987ced7c601a58a4193fd059e889fbd4, type: 3}

@@ -95,43 +95,60 @@ namespace EntityQueues
                     EntityQueueSpot spot = queue.FindEmptySpot();
                     // we want to know if this spot is taken before we get to it
                     enterQueueCount++;
-                    spot.Incoming(gameObject, () => 
-                    {
-                        if (enterQueueCount > 3)
-                        {
-                            // we tried few times, screw that!
-                            SetState(State.OVERFLOW);
-                        }
-                        else
-                        {
-                            // try again, delay?
-                            SetState(State.QUEUE);
-                        }
-                    });
                     WalkTo(spot.transform.position, () => {
                         Debug.Log("Destination reached " + name);
-                        if (spot.Enter(gameObject))
+                        if (Enter(spot))
                         {
                             // we are in spot, waiting to move to next spot
                             SetState(State.IN_QUEUE);
                         }
-                        else if (enterQueueCount > 3)
+                        else
                         {
-                            // we tried few times, screw that!
-                            SetState(State.OVERFLOW);
+                            TryQueue();
                         }
-                        else 
-                        {
-                            // try again, delay?
-                            SetState(State.QUEUE);
-                        }
+                    });
+                    spot.Incoming(gameObject, () =>
+                    {
+                        TryQueue();
                     });
                     break;
             }
         }
 
+        private void TryQueue()
+        {
+            if (enterQueueCount > 3)
+            {
+                // we tried few times, screw that!
+                SetState(State.OVERFLOW);
+            }
+            else
+            {
+                // try again, delay?
+                SetState(State.QUEUE);
+            }
+        }
+
+        private bool Enter(EntityQueueSpot spot)
+        {
+            return spot.Enter(gameObject, (next) =>
+            {
+                if (next == null)
+                {
+                    Debug.Log("Exiting queue");
+                    SetState(State.DESTINATION);
+                }
+                else
+                {
+                    Debug.Log("Enter next spot");
+                    Enter(next);
+                    WalkTo(next.transform.position);
+                }
+            });
+        }
+
         Tween walkTween;
-        private void WalkTo(Vector3 target, Action done)
+        private void WalkTo(Vector3 target, Action done = null)
         {
             SetState(State.WALKING);
             if (walkTween != null) walkTween.Kill();
@@ -142,7 +159,7 @@ namespace EntityQueues
                 .DOMove(target, duration)
                 .SetEase(Ease.InOutSine)
                 .OnComplete(() => {
-                    done.Invoke();
+                    done?.Invoke();
                     walkTween = null;
                 });
             
